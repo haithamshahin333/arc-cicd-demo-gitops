@@ -19,7 +19,7 @@ spec:
   - port: 80
   selector:
     app: azure-vote-front
-  type: ClusterIP
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,7 +40,7 @@ spec:
       - env:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
-        image: demo111reg123.azurecr.io/azvote/azure-vote-back:800ef139b2cecee8eded3eae709ed577ceb67fdb
+        image: demo111reg123.azurecr.io/azvote/azure-vote-back:4994d980479b798db76b6257395594278fdf0dc5
         name: azure-vote-back
         ports:
         - containerPort: 6379
@@ -69,9 +69,28 @@ spec:
           value: azure-vote-back
         - name: TITLE
           value: Voting Application
-        image: demo111reg123.azurecr.io/azvote/azure-vote-front:800ef139b2cecee8eded3eae709ed577ceb67fdb
+        image: demo111reg123.azurecr.io/azvote/azure-vote-front:4994d980479b798db76b6257395594278fdf0dc5
         name: azure-vote-front
         ports:
         - containerPort: 80
       nodeSelector:
         beta.kubernetes.io/os: linux
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: az-vote-front-ingress
+  namespace: dev
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: azure-vote-front
+            port:
+              number: 80
+        path: /(/|$)(.*)
+        pathType: Prefix

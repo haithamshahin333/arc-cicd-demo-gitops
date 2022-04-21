@@ -5,8 +5,8 @@ namespace: dev
 
 images:
   - name: demo111reg123.azurecr.io/azvote/azure-vote-front
-    newTag: be82d3102a6d48b20e029ef09fe53cb185ae0deb
+    newTag: 7c92a4726552e806bf4421b20a5cebc6bd804222
   - name: demo111reg123.azurecr.io/azvote/azure-vote-back
-    newTag: be82d3102a6d48b20e029ef09fe53cb185ae0deb
+    newTag: 7c92a4726552e806bf4421b20a5cebc6bd804222
 resources:
   - manifests.yaml

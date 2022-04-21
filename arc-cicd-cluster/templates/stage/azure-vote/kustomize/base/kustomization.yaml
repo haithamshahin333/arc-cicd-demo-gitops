@@ -5,8 +5,8 @@ namespace: stage
 
 images:
   - name: demo111reg123.azurecr.io/azvote/azure-vote-front
-    newTag: b105ad5a0298dfbb5acc54762c8a26fbbbf42a2d
+    newTag: 3fca341b6c599df2b094bed04794834ba0963618
   - name: demo111reg123.azurecr.io/azvote/azure-vote-back
-    newTag: b105ad5a0298dfbb5acc54762c8a26fbbbf42a2d
+    newTag: 3fca341b6c599df2b094bed04794834ba0963618
 resources:
   - manifests.yaml
